@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, input, computed, Output, EventEmitter } from '@angular/core';
 
 import { DUMMY_USERS } from '../dummy-users';
 
@@ -10,13 +10,25 @@ import { DUMMY_USERS } from '../dummy-users';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  @Input({required: true}) id!: string;
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name !: string;
+  @Output() select = new EventEmitter<string>();
 
   get imagePath() {
     return `assets/users/${this.avatar}`;
   }
 
+  // // signal approach
+  // id = input.required<string>();
+  // avatar = input.required<string>();
+  // name = input.required<string>();
+  // select = output<string>(); -- stores the event emitter. output type must be defined explicitly
+  
+
+  // imagePath = computed(() => `assets/users/${this.avatar}`);
+
   onSelectUser() {
+    this.select.emit(this.id);
   }
 }
