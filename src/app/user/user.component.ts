@@ -1,6 +1,10 @@
 import { Component, Input, input, computed, Output, EventEmitter } from '@angular/core';
 
-import { DUMMY_USERS } from '../dummy-users';
+type User = { 
+  id: string;
+  avatar: string;
+  name: string 
+};
 
 @Component({
   selector: 'app-user',
@@ -10,13 +14,14 @@ import { DUMMY_USERS } from '../dummy-users';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name !: string;
+  @Input({required: true}) user!: User;
+  // @Input({required: true}) id!: string;
+  // @Input({required: true}) avatar!: string;
+  // @Input({required: true}) name !: string;
   @Output() select = new EventEmitter<string>();
 
   get imagePath() {
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   // // signal approach
@@ -29,6 +34,6 @@ export class UserComponent {
   // imagePath = computed(() => `assets/users/${this.avatar}`);
 
   onSelectUser() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
