@@ -1,3 +1,6 @@
+# EasyTrack
+An application to track tasks of users developed using Angular.
+
 # Essentials
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
